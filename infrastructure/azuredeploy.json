@@ -62,10 +62,17 @@
         "User",
         "ServicePrincipal"
       ]
+    },
+    "deploymentTimestamp": {
+      "type": "string",
+      "defaultValue": "[utcNow()]",
+      "metadata": {
+        "description": "Timestamp for deployment naming (auto-generated)"
+      }
     }
   },
   "variables": {
-    "deploymentName": "[concat('contentRec-', parameters('environment'), '-', utcNow())]",
+    "deploymentName": "[concat('contentRec-', parameters('environment'), '-', parameters('deploymentTimestamp'))]",
     "bicepUrl": "https://raw.githubusercontent.com/jzagelbaum/content_recommendation_engine/main/infrastructure/main.bicep"
   },
   "resources": [
