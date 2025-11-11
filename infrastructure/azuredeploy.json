@@ -72,57 +72,33 @@
     }
   },
   "variables": {
-    "deploymentName": "[concat('contentRec-', parameters('environment'), '-', parameters('deploymentTimestamp'))]",
-    "bicepUrl": "https://raw.githubusercontent.com/jzagelbaum/content_recommendation_engine/main/infrastructure/main.bicep"
+    "deploymentName": "[concat('contentRec-', parameters('environment'), '-', parameters('deploymentTimestamp'))]"
   },
   "resources": [
     {
-      "type": "Microsoft.Resources/deployments",
+      "type": "Microsoft.Resources/resourceGroups",
       "apiVersion": "2021-04-01",
-      "name": "[variables('deploymentName')]",
+      "name": "[concat(parameters('resourcePrefix'), '-', parameters('environment'), '-rg')]",
       "location": "[parameters('location')]",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('bicepUrl')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "location": {
-            "value": "[parameters('location')]"
-          },
-          "environment": {
-            "value": "[parameters('environment')]"
-          },
-          "resourcePrefix": {
-            "value": "[parameters('resourcePrefix')]"
-          },
-          "principalId": {
-            "value": "[parameters('principalId')]"
-          },
-          "principalType": {
-            "value": "[parameters('principalType')]"
-          }
-        }
+      "properties": {},
+      "tags": {
+        "Environment": "[parameters('environment')]",
+        "Project": "Content Recommendation Engine"
       }
     }
   ],
   "outputs": {
     "resourceGroupName": {
       "type": "string",
-      "value": "[reference(variables('deploymentName')).outputs.resourceGroupName.value]"
+      "value": "[concat(parameters('resourcePrefix'), '-', parameters('environment'), '-rg')]"
     },
-    "openAIEndpoint": {
+    "location": {
       "type": "string",
-      "value": "[reference(variables('deploymentName')).outputs.openAIEndpoint.value]"
-    },
-    "openAIFunctionAppUrl": {
-      "type": "string",
-      "value": "[reference(variables('deploymentName')).outputs.openAIFunctionAppUrl.value]"
+      "value": "[parameters('location')]"
     },
     "deploymentInstructions": {
       "type": "string",
-      "value": "Deployment complete! See the Outputs tab for resource details. Next steps: 1) Configure function app settings, 2) Deploy application code, 3) Configure OpenAI models"
+      "value": "Resource group created successfully! This is a simplified deployment. To deploy the full infrastructure, use the Bicep templates directly with Azure CLI: az deployment sub create --location [location] --template-file infrastructure/main.bicep"
     }
   }
 }
