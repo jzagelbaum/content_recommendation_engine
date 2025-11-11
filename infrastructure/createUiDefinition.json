@@ -5,63 +5,111 @@
   "parameters": {
     "basics": [
       {
-        "name": "resourcePrefix",
+        "name": "siteName",
         "type": "Microsoft.Common.TextBox",
-        "label": "Resource Prefix",
-        "defaultValue": "contentrec",
-        "toolTip": "Prefix for all resource names (2-10 characters, lowercase only)",
+        "label": "Application Name",
+        "toolTip": "Name of the recommendation application",
+        "placeholder": "Enter application name",
         "constraints": {
           "required": true,
-          "regex": "^[a-z0-9]{2,10}$",
-          "validationMessage": "Must be 2-10 characters, lowercase letters and numbers only"
-        }
-      },
-      {
-        "name": "environment",
-        "type": "Microsoft.Common.DropDown",
-        "label": "Environment",
-        "defaultValue": "dev",
-        "toolTip": "Select the deployment environment",
-        "constraints": {
-          "allowedValues": [
-            {
-              "label": "Development",
-              "value": "dev"
-            },
-            {
-              "label": "Staging",
-              "value": "staging"
-            },
-            {
-              "label": "Production",
-              "value": "prod"
-            }
-          ],
-          "required": true
+          "regex": "^[a-zA-Z0-9-]{3,24}$",
+          "validationMessage": "Application name must be 3-24 characters long and contain only letters, numbers, and hyphens."
         }
       }
     ],
     "steps": [
       {
-        "name": "configuration",
-        "label": "Configuration",
+        "name": "appSettings",
+        "label": "Application Settings",
         "elements": [
           {
-            "name": "infoText",
-            "type": "Microsoft.Common.InfoBox",
-            "visible": true,
+            "name": "hostingPlanName",
+            "type": "Microsoft.Common.TextBox",
+            "label": "Hosting Plan Name",
+            "toolTip": "Name of the App Service hosting plan",
+            "placeholder": "Enter hosting plan name",
+            "constraints": {
+              "required": true,
+              "regex": "^[a-zA-Z0-9-]{3,40}$",
+              "validationMessage": "Hosting plan name must be 3-40 characters long and contain only letters, numbers, and hyphens."
+            }
+          },
+          {
+            "name": "sku",
+            "type": "Microsoft.Common.DropDown",
+            "label": "Pricing Tier",
+            "toolTip": "Select the pricing tier for the App Service plan",
+            "defaultValue": "Free (F1)",
+            "constraints": {
+              "allowedValues": [
+                {
+                  "label": "Free (F1)",
+                  "value": "F1"
+                },
+                {
+                  "label": "Basic (B1)",
+                  "value": "B1"
+                },
+                {
+                  "label": "Basic (B2)",
+                  "value": "B2"
+                },
+                {
+                  "label": "Basic (B3)",
+                  "value": "B3"
+                },
+                {
+                  "label": "Standard (S1)",
+                  "value": "S1"
+                },
+                {
+                  "label": "Standard (S2)",
+                  "value": "S2"
+                },
+                {
+                  "label": "Standard (S3)",
+                  "value": "S3"
+                }
+              ]
+            }
+          },
+          {
+            "name": "openaiApiKey",
+            "type": "Microsoft.Common.PasswordBox",
+            "label": {
+              "password": "OpenAI API Key"
+            },
+            "toolTip": "Enter your OpenAI API key",
+            "constraints": {
+              "required": true,
+              "regex": "^sk-[a-zA-Z0-9]{20,}$",
+              "validationMessage": "Please enter a valid OpenAI API key (starts with 'sk-')"
+            },
             "options": {
-              "icon": "Info",
-              "text": "This deployment will create a storage account as a starting point for the Content Recommendation Engine. For full infrastructure deployment, use the Bicep templates with Azure CLI after this deployment completes."
+              "hideConfirmation": true
+            }
+          },
+          {
+            "name": "openaiEndpoint",
+            "type": "Microsoft.Common.TextBox",
+            "label": "OpenAI Endpoint",
+            "toolTip": "OpenAI API endpoint URL",
+            "defaultValue": "https://api.openai.com/v1",
+            "constraints": {
+              "required": true,
+              "regex": "^https://.*",
+              "validationMessage": "Please enter a valid HTTPS URL"
             }
           }
         ]
       }
     ],
     "outputs": {
-      "resourcePrefix": "[basics('resourcePrefix')]",
-      "environment": "[basics('environment')]",
-      "deploymentTimestamp": "[utcNow()]"
+      "siteName": "[basics('siteName')]",
+      "hostingPlanName": "[steps('appSettings').hostingPlanName]",
+      "sku": "[steps('appSettings').sku]",
+      "openaiApiKey": "[steps('appSettings').openaiApiKey]",
+      "openaiEndpoint": "[steps('appSettings').openaiEndpoint]"
     }
   }
 }

@@ -2,40 +2,57 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "metadata": {
-    "description": "Content Recommendation Engine - Resource Group deployment template for Deploy to Azure button"
+    "description": "Content Recommendation Engine - Complete Azure infrastructure deployment"
   },
   "parameters": {
-    "environment": {
+    "siteName": {
       "type": "string",
-      "defaultValue": "dev",
+      "defaultValue": "[concat('recommendation-app-', uniqueString(resourceGroup().id))]",
       "metadata": {
-        "description": "Environment name (dev, staging, or prod)"
-      },
-      "allowedValues": [
-        "dev",
-        "staging",
-        "prod"
-      ]
-    },
-    "resourcePrefix": {
-      "type": "string",
-      "defaultValue": "contentrec",
-      "minLength": 2,
-      "maxLength": 10,
-      "metadata": {
-        "description": "Prefix for resource names (2-10 characters, lowercase letters and numbers only)"
+        "description": "Name of the web application"
       }
     },
-    "deploymentTimestamp": {
+    "hostingPlanName": {
       "type": "string",
-      "defaultValue": "[utcNow()]",
+      "defaultValue": "[concat('hosting-plan-', uniqueString(resourceGroup().id))]",
       "metadata": {
-        "description": "Timestamp for deployment naming (auto-generated)"
+        "description": "Name of the hosting plan"
+      }
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "F1",
+      "allowedValues": [
+        "F1",
+        "B1",
+        "B2",
+        "B3",
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "metadata": {
+        "description": "SKU for the hosting plan"
+      }
+    },
+    "openaiApiKey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "OpenAI API Key"
+      }
+    },
+    "openaiEndpoint": {
+      "type": "string",
+      "defaultValue": "https://api.openai.com/v1",
+      "metadata": {
+        "description": "OpenAI API Endpoint"
       }
     }
   },
   "variables": {
-    "storageAccountName": "[concat(parameters('resourcePrefix'), parameters('environment'), uniqueString(resourceGroup().id))]"
+    "webSiteName": "[parameters('siteName')]",
+    "appServicePlanName": "[parameters('hostingPlanName')]",
+    "storageAccountName": "[concat('storage', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
@@ -49,29 +66,63 @@
       "kind": "StorageV2",
       "properties": {
         "accessTier": "Hot"
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2021-02-01",
+      "name": "[variables('appServicePlanName')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('sku')]"
       },
-      "tags": {
-        "Environment": "[parameters('environment')]",
-        "Project": "Content Recommendation Engine"
+      "properties": {
+        "reserved": true
+      },
+      "kind": "linux"
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2021-02-01",
+      "name": "[variables('webSiteName')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+      ],
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
+        "siteConfig": {
+          "linuxFxVersion": "PYTHON|3.9",
+          "appSettings": [
+            {
+              "name": "OPENAI_API_KEY",
+              "value": "[parameters('openaiApiKey')]"
+            },
+            {
+              "name": "OPENAI_ENDPOINT",
+              "value": "[parameters('openaiEndpoint')]"
+            },
+            {
+              "name": "SCM_DO_BUILD_DURING_DEPLOYMENT",
+              "value": "true"
+            }
+          ]
+        }
       }
     }
   ],
   "outputs": {
+    "websiteUrl": {
+      "type": "string",
+      "value": "[concat('https://', reference(variables('webSiteName')).defaultHostName)]"
+    },
     "storageAccountName": {
       "type": "string",
       "value": "[variables('storageAccountName')]"
     },
-    "resourceGroupName": {
-      "type": "string",
-      "value": "[resourceGroup().name]"
-    },
-    "location": {
-      "type": "string",
-      "value": "[resourceGroup().location]"
-    },
     "deploymentInstructions": {
       "type": "string",
-      "value": "Storage account created successfully! This is a simplified deployment. To deploy the full infrastructure, use the Bicep templates directly with Azure CLI: az deployment sub create --location [location] --template-file infrastructure/main.bicep"
+      "value": "Deployment complete! Access your app at the website URL above. Deploy your Python application code to get started."
     }
   }
 }
