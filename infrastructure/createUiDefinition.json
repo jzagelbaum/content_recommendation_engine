@@ -60,7 +60,8 @@
     ],
     "outputs": {
       "resourcePrefix": "[basics('resourcePrefix')]",
-      "environment": "[basics('environment')]"
+      "environment": "[basics('environment')]",
+      "deploymentTimestamp": "[utcNow()]"
     }
   }
 }
