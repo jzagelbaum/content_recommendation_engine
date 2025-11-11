@@ -14,7 +14,7 @@ The project follows Python best practices with a clear separation between:
 ## Complete Directory Tree
 
 ```
-capstone/
+content_recommendation_engine/
 ├── .devcontainer/                    # Development container configuration
 │   ├── Dockerfile                    # Container image definition
 │   ├── devcontainer.json            # VS Code dev container config

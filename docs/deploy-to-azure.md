@@ -4,7 +4,7 @@ This guide walks you through deploying the complete Content Recommendation Engin
 
 ## 🚀 One-Click Deployment
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
 
 ## Prerequisites
 
@@ -228,8 +228,8 @@ az cognitiveservices account deployment create \
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/jzagelbaum_microsoft/capstone.git
-cd capstone
+git clone https://github.com/jzagelbaum/content_recommendation_engine.git
+cd content_recommendation_engine
 ```
 
 ### 3. Configure Application Settings

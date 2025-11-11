@@ -1,6 +1,6 @@
 # Content Recommendation Engine - Complete Azure Solution
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
 
 ## Overview
 
@@ -87,7 +87,7 @@ Click the **Deploy to Azure** button above to automatically provision all requir
 The project follows Python best practices with clear separation between library code, function apps, infrastructure, and documentation:
 
 ```
-capstone/
+content_recommendation_engine/
 ├── .devcontainer/              # Development container configuration
 ├── .github/workflows/          # GitHub Actions CI/CD pipelines
 ├── config/                     # Environment-specific configurations
@@ -135,8 +135,8 @@ For a complete description of the directory structure and organization, see the 
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/capstone.git
-cd capstone
+git clone https://github.com/YOUR_USERNAME/content_recommendation_engine.git
+cd content_recommendation_engine
 
 # Run automated setup script
 ./scripts/setup_local.sh
@@ -171,8 +171,8 @@ code .
 1. **Fork and clone the repository:**
 ```bash
 # Fork the repository on GitHub, then clone your fork
-git clone https://github.com/YOUR_USERNAME/capstone.git
-cd capstone
+git clone https://github.com/YOUR_USERNAME/content_recommendation_engine.git
+cd content_recommendation_engine
 ```
 
 2. **Create virtual environment and install dependencies:**
@@ -300,7 +300,7 @@ Coverage reports are generated in `htmlcov/index.html`.
 
 The easiest way to get started - deploy all infrastructure with a single click:
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
 
 **What you'll need:**
 1. **Azure Subscription** - [Create free account](https://azure.microsoft.com/free/) if you don't have one
@@ -321,8 +321,8 @@ The easiest way to get started - deploy all infrastructure with a single click:
 **After infrastructure deployment:**
 ```bash
 # Clone the repository
-git clone https://github.com/jzagelbaum_microsoft/capstone.git
-cd capstone
+git clone https://github.com/jzagelbaum/content_recommendation_engine.git
+cd content_recommendation_engine
 
 # Deploy application code using GitHub Actions
 # (See Option 2 below for GitHub Actions setup)
@@ -455,7 +455,7 @@ az login
 
 # Create a service principal for GitHub Actions
 az ad sp create-for-rbac \
-  --name "github-actions-capstone" \
+  --name "github-actions-content-rec" \
   --role contributor \
   --scopes /subscriptions/YOUR_SUBSCRIPTION_ID \
   --sdk-auth

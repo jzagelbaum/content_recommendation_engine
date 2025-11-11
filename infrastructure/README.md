@@ -1,6 +1,6 @@
 # Content Recommendation Engine - Azure Infrastructure
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
 
 This repository contains the Azure infrastructure templates for deploying a content recommendation engine using Azure Verified Modules (AVM). The infrastructure is designed to support a scalable, secure, and cost-effective content recommendation system for media and entertainment platforms.
 
@@ -50,7 +50,7 @@ The solution deploys the following Azure services:
 ### 1. Clone the Repository
 ```bash
 git clone <repository-url>
-cd capstone/infrastructure
+cd content_recommendation_engine/infrastructure
 ```
 
 ### 2. Get Your User Object ID

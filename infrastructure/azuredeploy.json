@@ -66,7 +66,7 @@
   },
   "variables": {
     "deploymentName": "[concat('contentRec-', parameters('environment'), '-', utcNow())]",
-    "bicepUrl": "https://raw.githubusercontent.com/jzagelbaum_microsoft/capstone/main/infrastructure/main.bicep"
+    "bicepUrl": "https://raw.githubusercontent.com/jzagelbaum/content_recommendation_engine/main/infrastructure/main.bicep"
   },
   "resources": [
     {

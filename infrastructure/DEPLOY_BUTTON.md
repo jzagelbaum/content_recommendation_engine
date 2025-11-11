@@ -83,17 +83,17 @@ The Deploy to Azure button uses this format:
 URLs must be URL-encoded:
 
 **Template URL**:
-- Raw: `https://raw.githubusercontent.com/jzagelbaum_microsoft/capstone/main/infrastructure/azuredeploy.json`
-- Encoded: `https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2Fazuredeploy.json`
+- Raw: `https://raw.githubusercontent.com/jzagelbaum/content_recommendation_engine/main/infrastructure/azuredeploy.json`
+- Encoded: `https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2Fazuredeploy.json`
 
 **UI Definition URL**:
-- Raw: `https://raw.githubusercontent.com/jzagelbaum_microsoft/capstone/main/infrastructure/createUiDefinition.json`
-- Encoded: `https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2FcreateUiDefinition.json`
+- Raw: `https://raw.githubusercontent.com/jzagelbaum/content_recommendation_engine/main/infrastructure/createUiDefinition.json`
+- Encoded: `https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2FcreateUiDefinition.json`
 
 ### Current Button
 
 ```markdown
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum_microsoft%2Fcapstone%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2Fjzagelbaum%2Fcontent_recommendation_engine%2Fmain%2Finfrastructure%2FcreateUiDefinition.json)
 ```
 
 ## Testing the Templates

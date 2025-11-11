@@ -20,8 +20,8 @@ We are committed to providing a welcoming and inclusive environment. Please be r
 
 1. **Fork and clone the repository:**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/capstone.git
-   cd capstone
+   git clone https://github.com/YOUR_USERNAME/content_recommendation_engine.git
+   cd content_recommendation_engine
    ```
 
 2. **Use the dev container (recommended):**
