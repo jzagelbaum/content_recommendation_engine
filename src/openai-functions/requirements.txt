@@ -1,0 +1,7 @@
+azure-functions
+azure-functions-worker
+pydantic
+azure-search-documents
+azure-identity
+openai
+asyncio-compat

@@ -1,0 +1,113 @@
+{
+  "version": "2.0",
+  "functionTimeout": "00:05:00",
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    }
+  },
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[4.*, 5.0.0)"
+  },
+  "functions": [
+    {
+      "name": "recommendations",
+      "entryPoint": "function_app.main",
+      "bindings": [
+        {
+          "authLevel": "function",
+          "type": "httpTrigger",
+          "direction": "in",
+          "name": "req",
+          "methods": ["get"],
+          "route": "recommendations"
+        },
+        {
+          "type": "http",
+          "direction": "out",
+          "name": "$return"
+        }
+      ]
+    },
+    {
+      "name": "interactions",
+      "entryPoint": "function_app.main",
+      "bindings": [
+        {
+          "authLevel": "function",
+          "type": "httpTrigger",
+          "direction": "in",
+          "name": "req",
+          "methods": ["post"],
+          "route": "interactions"
+        },
+        {
+          "type": "http",
+          "direction": "out",
+          "name": "$return"
+        }
+      ]
+    },
+    {
+      "name": "trending",
+      "entryPoint": "function_app.main",
+      "bindings": [
+        {
+          "authLevel": "function",
+          "type": "httpTrigger",
+          "direction": "in",
+          "name": "req",
+          "methods": ["get"],
+          "route": "trending"
+        },
+        {
+          "type": "http",
+          "direction": "out",
+          "name": "$return"
+        }
+      ]
+    },
+    {
+      "name": "similar",
+      "entryPoint": "function_app.main",
+      "bindings": [
+        {
+          "authLevel": "function",
+          "type": "httpTrigger",
+          "direction": "in",
+          "name": "req",
+          "methods": ["get"],
+          "route": "similar"
+        },
+        {
+          "type": "http",
+          "direction": "out",
+          "name": "$return"
+        }
+      ]
+    },
+    {
+      "name": "health",
+      "entryPoint": "function_app.main",
+      "bindings": [
+        {
+          "authLevel": "anonymous",
+          "type": "httpTrigger",
+          "direction": "in",
+          "name": "req",
+          "methods": ["get"],
+          "route": "health"
+        },
+        {
+          "type": "http",
+          "direction": "out",
+          "name": "$return"
+        }
+      ]
+    }
+  ]
+}

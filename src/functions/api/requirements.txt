@@ -1,0 +1,4 @@
+azure-functions
+azure-identity
+pydantic>=2.0
+python-dotenv

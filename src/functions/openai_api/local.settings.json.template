@@ -1,0 +1,27 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "FUNCTIONS_EXTENSION_VERSION": "~4",
+    "PYTHON_ENABLE_WORKER_EXTENSIONS": "1",
+    "PYTHONPATH": "../../..:../../../src",
+    
+    "AZURE_OPENAI_ENDPOINT": "",
+    "AZURE_OPENAI_API_KEY": "",
+    "AZURE_OPENAI_API_VERSION": "2024-02-01",
+    "AZURE_OPENAI_GPT_DEPLOYMENT": "gpt-4",
+    "AZURE_OPENAI_EMBEDDING_DEPLOYMENT": "text-embedding-ada-002",
+    
+    "AZURE_SEARCH_ENDPOINT": "",
+    "AZURE_SEARCH_API_KEY": "",
+    "AZURE_SEARCH_INDEX_NAME": "content-recommendations",
+    
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "",
+    
+    "ENVIRONMENT": "development",
+    "LOG_LEVEL": "INFO",
+    "ENABLE_AB_TESTING": "true",
+    "DEFAULT_AB_TEST_TRAFFIC_SPLIT": "0.3"
+  }
+}

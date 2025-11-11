@@ -1,0 +1,121 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "description": "Content Recommendation Engine - Complete Azure infrastructure deployment"
+  },
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "eastus2",
+      "metadata": {
+        "description": "Azure region for all resources"
+      },
+      "allowedValues": [
+        "eastus",
+        "eastus2",
+        "westus2",
+        "westus3",
+        "centralus",
+        "northeurope",
+        "westeurope",
+        "uksouth",
+        "southeastasia",
+        "japaneast",
+        "australiaeast"
+      ]
+    },
+    "environment": {
+      "type": "string",
+      "defaultValue": "dev",
+      "metadata": {
+        "description": "Environment name (dev, staging, or prod)"
+      },
+      "allowedValues": [
+        "dev",
+        "staging",
+        "prod"
+      ]
+    },
+    "resourcePrefix": {
+      "type": "string",
+      "defaultValue": "contentrec",
+      "minLength": 2,
+      "maxLength": 10,
+      "metadata": {
+        "description": "Prefix for resource names (2-10 characters, lowercase letters and numbers only)"
+      }
+    },
+    "principalId": {
+      "type": "string",
+      "metadata": {
+        "description": "Your Azure AD Object ID (find in Azure Portal > Azure Active Directory > Users)"
+      }
+    },
+    "principalType": {
+      "type": "string",
+      "defaultValue": "User",
+      "metadata": {
+        "description": "Type of principal (User for individual, ServicePrincipal for automation)"
+      },
+      "allowedValues": [
+        "User",
+        "ServicePrincipal"
+      ]
+    }
+  },
+  "variables": {
+    "deploymentName": "[concat('contentRec-', parameters('environment'), '-', utcNow())]",
+    "bicepUrl": "https://raw.githubusercontent.com/jzagelbaum_microsoft/capstone/main/infrastructure/main.bicep"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2021-04-01",
+      "name": "[variables('deploymentName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('bicepUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "environment": {
+            "value": "[parameters('environment')]"
+          },
+          "resourcePrefix": {
+            "value": "[parameters('resourcePrefix')]"
+          },
+          "principalId": {
+            "value": "[parameters('principalId')]"
+          },
+          "principalType": {
+            "value": "[parameters('principalType')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "resourceGroupName": {
+      "type": "string",
+      "value": "[reference(variables('deploymentName')).outputs.resourceGroupName.value]"
+    },
+    "openAIEndpoint": {
+      "type": "string",
+      "value": "[reference(variables('deploymentName')).outputs.openAIEndpoint.value]"
+    },
+    "openAIFunctionAppUrl": {
+      "type": "string",
+      "value": "[reference(variables('deploymentName')).outputs.openAIFunctionAppUrl.value]"
+    },
+    "deploymentInstructions": {
+      "type": "string",
+      "value": "Deployment complete! See the Outputs tab for resource details. Next steps: 1) Configure function app settings, 2) Deploy application code, 3) Configure OpenAI models"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+azure-functions
+azure-identity
+azure-search-documents
+openai
+pydantic>=2.0
+python-dotenv
